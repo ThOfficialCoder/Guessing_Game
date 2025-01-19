@@ -24,13 +24,28 @@ public class Main {
     }
 
     public static void PlayGame() {
-        System.out.println("\nEnter a guess: ");
         Scanner scanner = new Scanner(System.in);
+
+        Difficulty userDifficulty = new Difficulty();
+        System.out.println("Choose the level of difficulty: ");
+        String difficulty = scanner.next();
+        int result = 0;
+
+        if (difficulty.equals("Easy")) {
+            result = userDifficulty.getEasy();
+        } else if (difficulty.equals("Medium")) {
+            result = userDifficulty.getMedium();
+        } else if (difficulty.equals("Hard")) {
+            result = userDifficulty.getHard();
+        }
+
+        System.out.println("\nEnter a guess: ");
+
 
         Random rand = new Random();
         int secretGuess = rand.nextInt(100);
         boolean numberGuessed = true;
-        int guessCount = 4;
+        int guessCount = result - 1;
 
         while (numberGuessed) {
             int userGuess = scanner.nextInt();

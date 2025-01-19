@@ -20,6 +20,7 @@ public class Main {
         if (answer.equals("y")) {
             PlayGame();
         }
+        System.exit(0);
     }
 
     public static void PlayGame() {
@@ -29,15 +30,19 @@ public class Main {
         Random rand = new Random();
         int secretGuess = rand.nextInt(100);
         boolean numberGuessed = true;
-        int guessCount = 0;
+        int guessCount = 4;
 
         while (numberGuessed) {
             int userGuess = scanner.nextInt();
-            if (userGuess > secretGuess) {
-                guessCount++;
+            if (guessCount <= 0) {
+                System.out.println("You have run out of attempts. " +
+                        " the number was " + secretGuess);
+                break;
+            } else if (userGuess > secretGuess) {
+                guessCount--;
                 System.out.println("Number is too high. Try again");
             } else if (userGuess < secretGuess) {
-                guessCount++;
+                guessCount--;
                 System.out.println("Number is too low. Try again");
             } else {
                 System.out.println("Congratulations, you guessed the correct number" +
